@@ -8,18 +8,24 @@ import (
 	"fmt"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
+	"os"
 )
 
 func main() {
-	fmt.Println("Deploy Lander 1.0")
-
-	projects := config.LoadFromEnv()
-
-	logger, logerr := zap.NewDevelopment(zap.AddCaller(), zap.AddStacktrace(zapcore.DebugLevel))
+	logger, logerr := zap.NewDevelopment(zap.AddCaller(), zap.AddStacktrace(zapcore.ErrorLevel))
 	if logerr != nil {
 		panic(logerr)
 	}
 	defer logger.Sync()
+
+	fmt.Println("Deploy Lander 1.0")
+
+	projects := config.LoadFromEnv()
+
+	if len(projects) == 0 {
+		logger.Fatal("projects configuration is empty")
+		os.Exit(1)
+	}
 
 	builds := data.NewBuildsData()
 

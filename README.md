@@ -8,7 +8,7 @@ Tool for performing semi-automatic deploys:
 
 ## Configuration
 
-Environment variables:
+All configuration is done through environment variables.
 
 ```
 deploylander.projectname.path=/home/user/osdmon     | Required. Root of the project with git repository
@@ -22,6 +22,10 @@ Structure of variable key:
 - `deploylander` is common prefix
 - after prefix comes the alias of the project
 - then goes configuration parameter name
+
+## Usage
+
+
 
 ## API
 
